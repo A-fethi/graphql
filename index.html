@@ -1,14 +1,28 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Qraphql</title>
-    <script src="main.js"></script>
 </head>
+
 <body>
-    <input type="email" placeholder="Enter your email" id="email">
-    <input type="password" placeholder="Enter your password" id="password">
-    <button id="login-btn">Login</button>
+    <div id="logged-in-section" style="display: none;">
+        <h2>Welcome, User!</h2>
+        <p>You are logged in.</p>
+        <button onclick="logout()">Logout</button>
+        <div id="user-info"></div>
+    </div>
+
+    <div id="guest-section">
+        <h2>Please log in</h2>
+        <input type="email" placeholder="Enter your email" id="email">
+        <input type="password" placeholder="Enter your password" id="password">
+        <button id="login-btn">Login</button>
+    </div>
+
+    <script src="main.js"></script>
 </body>
+
 </html>
