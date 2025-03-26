@@ -4,25 +4,38 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/static/styles/style.css">
     <title>Qraphql</title>
 </head>
 
 <body>
-    <div id="logged-in-section" style="display: none;">
-        <h2>Welcome, User!</h2>
-        <p>You are logged in.</p>
-        <button onclick="logout()">Logout</button>
-        <div id="user-info"></div>
+    <div>
+        <div id="logged-in-section">
+            <h2 id="welcome-message"></h2>
+            <p>You are logged in.</p>
+            <button type="button" onclick="logout()" id="logout">Logout</button>
+            <div id="user-info"></div>
+
+            <div>
+                <h1>XP Progression</h1>
+                <div class="tooltip" id="tooltip"></div>
+                <svg id="xpGraph" width="800" height="400"></svg>
+            </div>
+
+            <div>
+                <svg id="xpPieChart" width="300" height="300" viewBox="-150 -150 300 300"></svg>
+            </div>
+        </div>
+
+        <div id="guest-section">
+            <h2>Please log in</h2>
+            <input type="email" placeholder="Enter your email" id="email">
+            <input type="password" placeholder="Enter your password" id="password">
+            <button type="button" id="login-btn">Login</button>
+        </div>
     </div>
 
-    <div id="guest-section">
-        <h2>Please log in</h2>
-        <input type="email" placeholder="Enter your email" id="email">
-        <input type="password" placeholder="Enter your password" id="password">
-        <button id="login-btn">Login</button>
-    </div>
-
-    <script src="main.js"></script>
+    <script type="module" src="/static/main.js"></script>
 </body>
 
 </html>
