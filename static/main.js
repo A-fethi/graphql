@@ -1,14 +1,24 @@
-import { lineChart } from "./components/linechart.js";
-import { circleChart } from "./components/circlechart.js";
+import { lineChart } from "./components/lineChart.js";
+import { circleChart } from "./components/circleChart.js";
+import { getExtension, showMessage } from "./components/utils.js";
 
 const loginBtn = document.getElementById("login-btn");
-const logOut = document.getElementById("logout")
+const logoutBtn = document.getElementById("logout")
 
 let jwt;
 
 const checkAuth = () => {
     jwt = localStorage.getItem("jwt")
     if (jwt) {
+        const payload = JSON.parse(atob(jwt.split(".")[1]))
+        const expiry = payload.exp * 1000
+        const now = Date.now()
+
+        if (now >= expiry) {
+            showMessage("Session expired. Please log in again.", "error");
+            logout();
+            return;
+        }
         document.getElementById("logged-in-section").style.display = "block";
         document.getElementById("guest-section").style.display = "none";
         dataDisplay(jwt);
@@ -38,10 +48,14 @@ const login = () => {
         })
         .then(data => {
             localStorage.setItem("jwt", data);
+            showMessage("Login successful!", "success")
             checkAuth();
             dataDisplay(data);
         })
-        .catch(error => console.error(error));
+        .catch(error => {
+            console.error(error)
+            showMessage("Login failed", "error")
+        });
 };
 
 loginBtn.addEventListener("click", login);
@@ -49,10 +63,12 @@ loginBtn.addEventListener("click", login);
 const logout = () => {
     localStorage.removeItem("jwt");
     jwt = null;
+    console.log(jwt);
+    showMessage("Logout successful", "success")
     checkAuth();
 };
 
-logOut.addEventListener('click', logout)
+logoutBtn.addEventListener('click', logout)
 
 const dataDisplay = (jwt) => {
     const query = `{
@@ -126,13 +142,12 @@ const dataDisplay = (jwt) => {
                 projectsXp += xpTransactions[i].amount
             }
 
-            document.getElementById("user-info").innerHTML = `
+            document.getElementById("user-info-content").innerHTML = `
                 <p>ID: ${user.id}</p>
                 <p>Login: ${user.login}</p>
                 <p>Email: ${user.email}</p>
-                <p>Audit-Ratio: ${Math.round(user.auditRatio)}</p>
-                <p>amount: ${Math.round(totalXp / 1000)}</p>
-                <p>xpamount: ${Math.round(projectsXp / 1000)}</p>
+                <p>Audits ratio: ${Math.round(user.auditRatio)}</p>
+                <p>Total XP: ${getExtension(totalXp)}</p>
             `;
             updateUI(user);
             lineChart(allXpTransactions);

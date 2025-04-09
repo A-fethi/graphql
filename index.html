@@ -10,21 +10,28 @@
 
 <body>
     <div>
+        <div id="message-box" class="message-box"></div>
         <div id="logged-in-section">
-            <h2 id="welcome-message"></h2>
-            <p>You are logged in.</p>
-            <button type="button" onclick="logout()" id="logout">Logout</button>
-            <div id="user-info"></div>
+            <nav class="navbar">
+                <h2 id="welcome-message"></h2>
+                <button type="button" id="logout">Logout</button>
+            </nav>
 
-            <div>
-                <h1>XP Progression</h1>
-                <div class="tooltip" id="tooltip"></div>
-                <svg id="xpGraph" width="800" height="400"></svg>
+            <div class="flex-container">
+                <div class="user-info-section">
+                    <h3>User Information</h3>
+                    <div id="user-info-content"></div>
+                </div>
+                <div class="xp-pie">
+                    <svg id="xpPieChart" width="500" height="500" viewBox="-150 -150 300 300"></svg>
+                </div>
+                <div class="xp-progression">
+                    <h1>XP Progression</h1>
+                    <div class="tooltip" id="tooltip"></div>
+                    <svg id="xpGraph" width="800" height="400"></svg>
+                </div>
             </div>
-
-            <div>
-                <svg id="xpPieChart" width="300" height="300" viewBox="-150 -150 300 300"></svg>
-            </div>
+            
         </div>
 
         <div id="guest-section">

@@ -1,27 +1,275 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.message-box {
+    display: none;
+    padding: 10px;
+    margin: 10px 0;
+    border-radius: 5px;
+    text-align: center;
+    font-weight: bold;
+}
+
+.message.success { background: #4CAF50; color: white; }
+.message.error { background: #f44336; color: white; }
+.message.info { background: #2196F3; color: white; }
+
 body {
     background: #121212;
-    color: white;
-    font-family: Arial, sans-serif;
+    color: #ffffff;
+    font-family: 'Arial', sans-serif;
     text-align: center;
+    min-height: 100vh;
+    padding: 20px;
+    line-height: 1.6;
+}
+
+div {
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+h1,
+h2 {
+    margin-bottom: 20px;
+    font-weight: 300;
+    color: #e0e0e0;
+}
+
+h1 {
+    font-size: 2.5em;
+}
+
+h2 {
+    font-size: 1.8em;
+}
+
+#logged-in-section,
+#guest-section {
+    padding: 30px;
+    border-radius: 8px;
+    background: #1a1a1a;
+    margin-bottom: 30px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
 }
 
 #logged-in-section {
     display: none;
 }
 
+#guest-section {
+    max-width: 400px;
+    margin: 50px auto;
+}
+
+input[type="email"],
+input[type="password"] {
+    display: block;
+    width: 100%;
+    padding: 12px;
+    margin: 10px 0;
+    background: #252525;
+    border: 1px solid #333;
+    border-radius: 4px;
+    color: #ffffff;
+    font-size: 16px;
+    transition: border-color 0.3s ease;
+}
+
+input[type="email"]:focus,
+input[type="password"]:focus {
+    border-color: #6200ea;
+    outline: none;
+}
+
+button {
+    padding: 12px 24px;
+    background: #6200ea;
+    color: #ffffff;
+    border: none;
+    border-radius: 4px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background 0.3s ease;
+}
+
+button:hover {
+    background: #7c4dff;
+}
+
+#logout {
+    background: #d32f2f;
+}
+
+#logout:hover {
+    background: #f44336;
+}
+
+#user-info {
+    margin-top: 20px;
+    text-align: left;
+    padding: 15px;
+    background: #252525;
+    border-radius: 4px;
+}
+
+#user-info p {
+    margin: 8px 0;
+}
+
+.flex-container {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: center;
+}
+
+.user-info-section {
+    border: 1px solid #333;
+    display: block;
+    margin: 20px auto;
+    background: #1a1a1a;
+    border-radius: 4px;
+    padding: 70px;
+}
+
 svg {
     border: 1px solid #333;
     display: block;
-    margin: auto;
+    margin: 20px auto;
+    background: #1a1a1a;
+    border-radius: 4px;
+}
+
+.xp-progression {
+    width: 100%;
+    height: 400px;
+    margin-bottom: 50px;
+}
+
+#xpGraph {
+    width: 100%;
+    height: 100%;
+}
+
+#xpPieChart {
+    margin: 30px auto;
 }
 
 .tooltip {
     position: absolute;
-    background: rgba(0, 0, 0, 0.8);
-    color: white;
-    padding: 6px 10px;
-    border-radius: 5px;
+    background: rgba(0, 0, 0, 0.9);
+    color: #ffffff;
+    padding: 8px 12px;
+    border-radius: 4px;
     font-size: 14px;
     display: none;
     pointer-events: none;
+    z-index: 1000;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: #1a1a1a;
+    padding: 15px 30px;
+    border-bottom: 1px solid #333;
+    flex-wrap: wrap;
+}
+
+.navbar h2 {
+    margin: 0;
+    font-size: 1.5em;
+    color: #e0e0e0;
+    flex: 1;
+    text-align: left;
+}
+
+.navbar p {
+    margin: 0 20px;
+    font-size: 1em;
+    color: #bbbbbb;
+}
+
+.navbar button#logout {
+    margin-left: 20px;
+    padding: 8px 16px;
+    background: #d32f2f;
+    border-radius: 4px;
+}
+
+.navbar button#logout:hover {
+    background: #f44336;
+}
+
+.navbar #user-info {
+    margin: 0;
+    padding: 0;
+    background: none;
+    text-align: right;
+    flex: 1;
+}
+
+.navbar #user-info p {
+    margin: 0;
+    font-size: 0.9em;
+    color: #bbbbbb;
+}
+
+#logged-in-section {
+    display: none;
+    padding: 0;
+}
+
+@media (max-width: 768px) {
+    h1 {
+        font-size: 2em;
+    }
+
+    h2 {
+        font-size: 1.5em;
+    }
+
+    .xp-progression {
+        height: 300px;
+    }
+
+    #xpGraph {
+        width: 100%;
+        height: 300px;
+    }
+
+    #xpPieChart {
+        width: 250px;
+        height: 250px;
+    }
+
+    button {
+        width: 100%;
+    }
+
+    .navbar {
+        flex-direction: column;
+        align-items: flex-start;
+        padding: 10px 20px;
+    }
+
+    .navbar h2,
+    .navbar p,
+    .navbar button#logout,
+    .navbar #user-info {
+        margin: 5px 0;
+        text-align: center;
+        flex: none;
+        width: 100%;
+    }
+
+    .navbar button#logout {
+        margin-left: 0;
+    }
 }
