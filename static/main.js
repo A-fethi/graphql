@@ -1,5 +1,6 @@
 import { lineChart } from "./components/linechart.js";
 import { circleChart } from "./components/circlechart.js";
+import { getExtension } from "./components/utils.js";
 
 const loginBtn = document.getElementById("login-btn");
 const logOut = document.getElementById("logout")
@@ -127,12 +128,14 @@ const dataDisplay = (jwt) => {
             }
 
             document.getElementById("user-info").innerHTML = `
+                <div><h1>Personal Informations</h1></div>
+                <div class="user-info">
                 <p>ID: ${user.id}</p>
                 <p>Login: ${user.login}</p>
                 <p>Email: ${user.email}</p>
                 <p>Audit-Ratio: ${Math.round(user.auditRatio)}</p>
-                <p>amount: ${Math.round(totalXp / 1000)}</p>
-                <p>xpamount: ${Math.round(projectsXp / 1000)}</p>
+                <p>Total XP: ${getExtension(totalXp)}</p>
+                </div>
             `;
             updateUI(user);
             lineChart(allXpTransactions);

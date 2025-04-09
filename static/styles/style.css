@@ -25,3 +25,7 @@ svg {
     display: none;
     pointer-events: none;
 }
+
+.user-info {
+    border: white 1px solid;
+}

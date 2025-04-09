@@ -1,3 +1,5 @@
+import { getExtension } from "./utils.js";
+
 export const lineChart = (data) => {
     if (!data || data.length === 0) {
         console.error("No data available for the chart");
@@ -55,8 +57,8 @@ export const lineChart = (data) => {
                 tooltip.innerHTML = `
                     <strong>Module:</strong> ${d.path.split('/').pop()}<br>
                     <strong>Date:</strong> ${new Date(d.createdAt).toLocaleDateString()}<br>
-                    <strong>XP Earned:</strong> ${d.amount}<br>
-                    <strong>Total XP:</strong> ${d.totalXP}
+                    <strong>XP Earned:</strong> ${getExtension(d.amount)}<br>
+                    <strong>Total XP:</strong> ${getExtension(d.totalXP)}
                 `;
                 tooltip.style.display = "block";
                 tooltip.style.left = `${e.pageX + 10}px`;
