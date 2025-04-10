@@ -22,10 +22,12 @@ export const getExtension = (totalXP) => {
 export const showMessage = (message, type = "success") => {
     const messageBox = document.getElementById("message-box");
     messageBox.innerHTML = message;
-    messageBox.className = `message ${type}`;
+    
+    messageBox.className = "message-box";
+    messageBox.classList.add(type);
     messageBox.style.display = "block";
 
     setTimeout(() => {
         messageBox.style.display = "none";
-    }, 2000);
+    }, 3000);
 };

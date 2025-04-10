@@ -58,6 +58,11 @@ const login = () => {
         });
 };
 
+document.addEventListener("keydown", (e) => {
+    if (e.key === "Enter") {
+        login()
+    }
+})
 loginBtn.addEventListener("click", login);
 
 const logout = () => {
