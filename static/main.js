@@ -1,5 +1,5 @@
-import { lineChart } from "./components/lineChart.js";
-import { circleChart } from "./components/circleChart.js";
+import { lineChart } from "./components/linechart.js";
+import { circleChart } from "./components/circlechart.js";
 import { getExtension, showMessage } from "./components/utils.js";
 
 const loginBtn = document.getElementById("login-btn");
@@ -63,7 +63,6 @@ loginBtn.addEventListener("click", login);
 const logout = () => {
     localStorage.removeItem("jwt");
     jwt = null;
-    console.log(jwt);
     showMessage("Logout successful", "success")
     checkAuth();
 };
@@ -146,7 +145,7 @@ const dataDisplay = (jwt) => {
                 <p>ID: ${user.id}</p>
                 <p>Login: ${user.login}</p>
                 <p>Email: ${user.email}</p>
-                <p>Audits ratio: ${Math.round(user.auditRatio)}</p>
+                <p>Audits ratio: ${(user.auditRatio).toFixed(1)}</p>
                 <p>Total XP: ${getExtension(totalXp)}</p>
             `;
             updateUI(user);
