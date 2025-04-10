@@ -133,7 +133,7 @@ const dataDisplay = (jwt) => {
                 <p>ID: ${user.id}</p>
                 <p>Login: ${user.login}</p>
                 <p>Email: ${user.email}</p>
-                <p>Audit-Ratio: ${Math.round(user.auditRatio)}</p>
+                <p>Audit-Ratio: ${(user.auditRatio).toFixed(1)}</p>
                 <p>Total XP: ${getExtension(totalXp)}</p>
                 </div>
             `;

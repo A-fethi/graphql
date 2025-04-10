@@ -51,7 +51,6 @@ export const lineChart = (data) => {
             circle.setAttribute("cy", scaleY(d.totalXP));
             circle.setAttribute("r", "2");
             circle.setAttribute("fill", "white");
-            circle.style.cursor = "pointer";
 
             circle.addEventListener("mouseover", (e) => {
                 tooltip.innerHTML = `
