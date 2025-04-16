@@ -1,4 +1,4 @@
-# GraphQL Dashboard
+# GraphQL
 
 A modern, responsive dashboard for visualizing user XP data from the Zone01 Oujda platform. This dashboard allows users to log in, view their personal information, and explore their XP progression and distribution across projects using interactive charts.
 
@@ -75,12 +75,6 @@ A modern, responsive dashboard for visualizing user XP data from the Zone01 Oujd
 ## Contributing
 
 Pull requests are welcome! For major changes, please open an issue first to discuss what you would like to change.
-
----
-
-## License
-
-[MIT](LICENSE)
 
 ---
 
