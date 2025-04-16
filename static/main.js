@@ -9,16 +9,8 @@ let jwt;
 
 const checkAuth = () => {
     jwt = localStorage.getItem("jwt")
-    if (jwt) {
-        const payload = JSON.parse(atob(jwt.split(".")[1]))
-        const expiry = payload.exp * 1000
-        const now = Date.now()
 
-        if (now >= expiry) {
-            showMessage("Session expired. Please log in again.", "error");
-            logout();
-            return;
-        }
+    if (jwt) {
         document.getElementById("logged-in-section").style.display = "block";
         document.getElementById("guest-section").style.display = "none";
         dataDisplay(jwt);
@@ -48,6 +40,7 @@ const login = () => {
         })
         .then(data => {
             localStorage.setItem("jwt", data);
+            localStorage.setItem("loginTime", Date.now());
             showMessage("Login successful!", "success")
             checkAuth();
             dataDisplay(data);
@@ -136,15 +129,11 @@ const dataDisplay = (jwt) => {
             const allXpTransactions = data.data.allXpTransactions;
 
             let totalXp = 0;
-            let projectsXp = 0
 
             for (let i = 0; i < allXpTransactions.length; i++) {
                 totalXp += allXpTransactions[i].amount
             }
 
-            for (let i = 0; i < xpTransactions.length; i++) {
-                projectsXp += xpTransactions[i].amount
-            }
 
             document.getElementById("user-info-content").innerHTML = `
                 <p>ID: ${user.id}</p>

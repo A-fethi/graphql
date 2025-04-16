@@ -54,14 +54,13 @@ export const lineChart = (data) => {
     progPath.setAttribute("stroke-width", "2");
     svg.appendChild(progPath);
 
-    dataWithCumulativeXP.forEach((d, i) => {
+    dataWithCumulativeXP.forEach((d) => {
         let circle = document.createElementNS("http://www.w3.org/2000/svg", "circle");
         const timestamp = new Date(d.createdAt).getTime();
         circle.setAttribute("cx", scaleX(timestamp));
         circle.setAttribute("cy", scaleY(d.totalXP));
         circle.setAttribute("r", "2");
         circle.setAttribute("fill", "white");
-        circle.style.cursor = "pointer";
 
         circle.addEventListener("mouseover", (e) => {
             tooltip.innerHTML = `
@@ -106,7 +105,6 @@ export const lineChart = (data) => {
             circle.setAttribute("cy", scaleY(d.totalXP));
             circle.setAttribute("r", "2");
             circle.setAttribute("fill", "white");
-            circle.style.cursor = "pointer";
 
             svg.appendChild(circle);
         });
