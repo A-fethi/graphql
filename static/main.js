@@ -82,9 +82,6 @@ const dataDisplay = (jwt) => {
             _and: [{type: {_eq: "xp"}}, {eventId: {_eq: 41}}, {object: {type: {_eq: "project"}}}]
         }) {
             path
-            createdAt
-            eventId
-            campus
             amount
             object {
                 type
@@ -97,8 +94,6 @@ const dataDisplay = (jwt) => {
         }) {
             path
             createdAt
-            eventId
-            campus
             amount
             object {
                 type
