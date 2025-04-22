@@ -14,20 +14,33 @@
 
 <body>
     <div id="message-box" class="message-box"></div>
-    
+
     <div class="container">
         <div id="logged-in-section">
             <nav class="navbar">
-                <h2 id="welcome-message"></h2>
+                <h2 id="welcome-message">
+                    <div id="graphql-logo-container">
+                        <img id="graph-logo" src="https://graphql.org/img/logo.svg"  alt="GraphQL Logo"/>
+                        <span id="graph-logo-span">GraphQL</span>
+                    </div>
+                </h2>
                 <button type="button" id="logout">
                     Logout
                 </button>
             </nav>
 
             <div class="flex-container">
-                <div class="user-info-section card">
-                    <h1>User Information</h1>
-                    <div id="user-info-content"></div>
+                <div class="personal-info card">
+                    <h1>Personal Information</h1>
+                    <div id="personal-info-content"></div>
+                </div>
+                <div class="account-info card">
+                    <h1>Account Details</h1>
+                    <div id="account-info-content"></div>
+                </div>
+                <div class="stats-info card">
+                    <h1>Statistics</h1>
+                    <div id="stats-info-content"></div>
                 </div>
                 <div class="xp-pie card">
                     <h1>XP by Project</h1>

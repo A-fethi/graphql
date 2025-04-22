@@ -139,25 +139,32 @@ const dataDisplay = (jwt) => {
                 totalXp += allXpTransactions[i].amount
             }
 
-
-            document.getElementById("user-info-content").innerHTML = `
-                <p>ID: ${user.id}</p>
-                <p>Login: ${user.login}</p>
-                <p>Email: ${user.email}</p>
-                <p>Audits ratio: ${(user.auditRatio).toFixed(1)}</p>
-                <p>Total XP: ${getExtension(totalXp)}</p>
+            document.getElementById("personal-info-content").innerHTML = `
+                <p>First Name: <span>${user.firstName}</span></p>
+                <p>Last Name: <span>${user.lastName}</span></p>
             `;
-            updateUI(user);
+            
+            document.getElementById("account-info-content").innerHTML = `
+                <p>ID: <span>${user.id}</span></p>
+                <p>Login: <span>${user.login}</span></p>
+                <p>Email: <span>${user.email}</span></p>
+            `;
+            
+            document.getElementById("stats-info-content").innerHTML = `
+                <p>Audits ratio: <span>${(user.auditRatio).toFixed(1)}</span></p>
+                <p>Total XP: <span>${getExtension(totalXp)}</span></p>
+            `;
+            
             lineChart(allXpTransactions);
             circleChart(xpTransactions)
         })
         .catch(error => console.error("Error fetching user data:", error));
 };
 
-const updateUI = (user) => {
-    if (user) {
-        document.getElementById('welcome-message').innerHTML = `Welcome ${user.firstName} ${user.lastName}!`
-    }
-}
+// const updateUI = (user) => {
+//     if (user) {
+//         document.getElementById('welcome-message').innerHTML = `GraphQL`
+//     }
+// }
 
 checkAuth();

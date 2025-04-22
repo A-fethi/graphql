@@ -19,6 +19,25 @@
     --border: #374151;
 }
 
+.welcome-message {
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+}
+
+#graphql-logo-container {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+#graph-logo {
+    width: 40px;
+}
+
+#graph-logo-span {
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    color:  #e535ab;
+}
+
 body {
     background: var(--bg-primary);
     color: var(--text-primary);
@@ -29,7 +48,8 @@ body {
 }
 
 h1,
-h2 {
+h2,
+h3 {
     font-weight: 600;
     color: var(--text-primary);
     line-height: 1.2;
@@ -43,6 +63,12 @@ h1 {
 h2 {
     font-size: 1.5rem;
     margin-bottom: 1rem;
+}
+
+h3 {
+    font-size: 1.15rem;
+    margin-bottom: 0.75rem;
+    color: var(--primary);
 }
 
 /* Message Box Styles */
@@ -193,18 +219,48 @@ button:active {
 /* Content Layout */
 .flex-container {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: auto auto;
     gap: 1.5rem;
     margin-bottom: 2rem;
+}
+
+/* Card order in grid */
+.personal-info {
+    grid-column: 1 / 2;
+    grid-row: 1 / 2;
+}
+
+.account-info {
+    grid-column: 2 / 3;
+    grid-row: 1 / 2;
+}
+
+.stats-info {
+    grid-column: 3 / 4;
+    grid-row: 1 / 2;
+}
+
+.xp-pie {
+    grid-column: 1 / 3;
+    grid-row: 2 / 3;
+}
+
+.xp-progression {
+    grid-column: 1 / 4;
+    grid-row: 3 / 4;
 }
 
 .card {
     background: var(--bg-secondary);
     border-radius: 0.75rem;
-    padding: 0.8rem;
+    padding: 1.5rem;
     box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
     height: 100%;
     transition: transform 0.2s ease, box-shadow 0.2s ease;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
 .card:hover {
@@ -212,25 +268,16 @@ button:active {
     box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
 }
 
-.xp-pie,
-.user-info-section {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+/* Information cards styles */
+#personal-info-content,
+#account-info-content,
+#stats-info-content {
+    width: 100%;
 }
 
-.user-info-section {
-    gap: 60px;
-}
-
-.xp-progression {
-    display: flex;
-    grid-column: 1 / -1;
-    flex-direction: column;
-    align-items: center;
-}
-
-#user-info-content p {
+#personal-info-content p,
+#account-info-content p,
+#stats-info-content p {
     margin-bottom: 0.75rem;
     color: var(--text-secondary);
     display: flex;
@@ -239,8 +286,17 @@ button:active {
     padding-bottom: 0.5rem;
 }
 
-#user-info-content p:last-child {
+#personal-info-content p:last-child,
+#account-info-content p:last-child,
+#stats-info-content p:last-child {
     border-bottom: none;
+    margin-bottom: 0;
+}
+
+.xp-progression {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
 /* Chart Styles */
@@ -277,10 +333,69 @@ svg {
     max-width: 250px;
 }
 
-/* responsive desing */
+/* responsive design */
+@media (max-width: 1024px) {
+    .flex-container {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    
+    .personal-info {
+        grid-column: 1 / 2;
+        grid-row: 1 / 2;
+    }
+    
+    .account-info {
+        grid-column: 2 / 3;
+        grid-row: 1 / 2;
+    }
+    
+    .stats-info {
+        grid-column: 1 / 2;
+        grid-row: 2 / 3;
+    }
+    
+    .xp-pie {
+        grid-column: 2 / 3;
+        grid-row: 2 / 3;
+    }
+    
+    .xp-progression {
+        grid-column: 1 / 3;
+        grid-row: 3 / 4;
+    }
+}
+
 @media (max-width: 768px) {
     .flex-container {
         grid-template-columns: 1fr;
+    }
+    
+    .personal-info,
+    .account-info,
+    .stats-info,
+    .xp-pie,
+    .xp-progression {
+        grid-column: 1 / 2;
+    }
+    
+    .personal-info {
+        grid-row: 1 / 2;
+    }
+    
+    .account-info {
+        grid-row: 2 / 3;
+    }
+    
+    .stats-info {
+        grid-row: 3 / 4;
+    }
+    
+    .xp-pie {
+        grid-row: 4 / 5;
+    }
+    
+    .xp-progression {
+        grid-row: 5 / 6;
     }
 
     .navbar {
@@ -304,5 +419,9 @@ svg {
 
     h2 {
         font-size: 1.25rem;
+    }
+    
+    h3 {
+        font-size: 1.1rem;
     }
 }
