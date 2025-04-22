@@ -129,7 +129,6 @@ const dataDisplay = (jwt) => {
             return response.json();
         })
         .then(data => {
-            console.log("User Data:", data);
             const user = data.data.user[0];
             const xpTransactions = data.data.xpTransactions;
             const allXpTransactions = data.data.allXpTransactions;
