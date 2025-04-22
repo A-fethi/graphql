@@ -19,7 +19,7 @@ export const circleChart = (projects) => {
         circle.setAttribute("stroke-dasharray", `${percentage * 628} 628`);
         circle.setAttribute("stroke-dashoffset", offset);
 
-        circle.addEventListener("mouseover", (e) => {
+        circle.addEventListener("mousemove", (e) => {
             const tooltip = document.getElementById("tooltip");
             tooltip.innerHTML = `
                 <strong>Project:</strong> ${project.path.split('/').pop()}<br>
