@@ -129,6 +129,9 @@ const dataDisplay = (jwt) => {
             return response.json();
         })
         .then(data => {
+            if (data.errors){
+                logout()
+            }
             const user = data.data.user[0];
             const xpTransactions = data.data.xpTransactions;
             const allXpTransactions = data.data.allXpTransactions;
