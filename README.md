@@ -28,7 +28,6 @@ A modern, responsive dashboard for visualizing user XP data from the Zone01 Oujd
 
 2. **Serve the files locally:**
     - Simply open `index.html` directly in your browser.
-
 ---
 
 ## Usage
@@ -75,6 +74,13 @@ A modern, responsive dashboard for visualizing user XP data from the Zone01 Oujd
 ## Contributing
 
 Pull requests are welcome! For major changes, please open an issue first to discuss what you would like to change.
+
+---
+
+## Deployment
+You can try out the dashboard instantly without any setup using the live demo:
+
+- **Live Demo:** [afethi-graphql.netlify.app](https://afethi-graphql.netlify.app/)
 
 ---
 

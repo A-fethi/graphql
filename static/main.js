@@ -9,12 +9,16 @@ let jwt;
 
 const checkAuth = () => {
     jwt = localStorage.getItem("jwt")
+    const expiry = localStorage.getItem("jwt_expiry");
+    const now = Date.now();
 
-    if (jwt) {
+    if (jwt && expiry && now < parseInt(expiry)) {
         document.getElementById("logged-in-section").style.display = "block";
         document.getElementById("guest-section").style.display = "none";
         dataDisplay(jwt);
     } else {
+        localStorage.removeItem("jwt");
+        localStorage.removeItem("jwt_expiry");
         document.getElementById("logged-in-section").style.display = "none";
         document.getElementById("guest-section").style.display = "block";
     }
@@ -39,11 +43,18 @@ const login = () => {
             return response.json();
         })
         .then(data => {
+            const now = Date.now()
             localStorage.setItem("jwt", data);
-            localStorage.setItem("loginTime", Date.now());
+            localStorage.setItem("jwt_expiry", now + 3600000)
             showMessage("Login successful!", "success")
             checkAuth();
             dataDisplay(data);
+            setTimeout(() => {
+                localStorage.removeItem("jwt");
+                localStorage.removeItem("jwt_expiry");
+                showMessage("Session expired. Please log in again.", "error");
+                checkAuth();
+            }, 3600000);
         })
         .catch(error => {
             console.error(error)
