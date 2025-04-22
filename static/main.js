@@ -129,8 +129,9 @@ const dataDisplay = (jwt) => {
             return response.json();
         })
         .then(data => {
-            if (data.errors){
+            if (data.errors) {
                 logout()
+                return
             }
             const user = data.data.user[0];
             const xpTransactions = data.data.xpTransactions;
@@ -163,11 +164,5 @@ const dataDisplay = (jwt) => {
         })
         .catch(error => console.error("Error fetching user data:", error));
 };
-
-// const updateUI = (user) => {
-//     if (user) {
-//         document.getElementById('welcome-message').innerHTML = `GraphQL`
-//     }
-// }
 
 checkAuth();
