@@ -106,6 +106,17 @@ export const lineChart = (data) => {
             circle.setAttribute("r", "2");
             circle.setAttribute("fill", "white");
 
+            circle.addEventListener("mouseover", (e) => {
+                tooltip.innerHTML = `
+                        <strong>Module:</strong> ${d.path.split('/').pop()}<br>
+                        <strong>Date:</strong> ${new Date(d.createdAt).toLocaleDateString()}<br>
+                        <strong>XP Earned:</strong> ${getExtension(d.amount)}<br>
+                        <strong>Total XP:</strong> ${getExtension(d.totalXP)}
+                    `;
+                tooltip.style.display = "block";
+                tooltip.style.left = `${e.pageX - 100}px`;
+                tooltip.style.top = `${e.pageY - 100}px`;
+            })
             svg.appendChild(circle);
         });
     }
