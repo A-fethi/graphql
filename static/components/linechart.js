@@ -49,7 +49,7 @@ export const lineChart = (data) => {
 
     const progPath = document.createElementNS("http://www.w3.org/2000/svg", "path");
     progPath.setAttribute("d", path);
-    progPath.setAttribute("stroke", "purple");
+    progPath.setAttribute("stroke", "#14b8a6");
     progPath.setAttribute("fill", "none");
     progPath.setAttribute("stroke-width", "2");
     svg.appendChild(progPath);
@@ -60,7 +60,7 @@ export const lineChart = (data) => {
         circle.setAttribute("cx", scaleX(timestamp));
         circle.setAttribute("cy", scaleY(d.totalXP));
         circle.setAttribute("r", "2");
-        circle.setAttribute("fill", "white");
+        circle.setAttribute("fill", "#FA8072");
 
         circle.addEventListener("mouseover", (e) => {
             tooltip.innerHTML = `

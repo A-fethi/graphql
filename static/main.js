@@ -147,18 +147,18 @@ const dataDisplay = (jwt) => {
                 <p>First Name: <span>${user.firstName}</span></p>
                 <p>Last Name: <span>${user.lastName}</span></p>
             `;
-            
+
             document.getElementById("account-info-content").innerHTML = `
                 <p>ID: <span>${user.id}</span></p>
                 <p>Login: <span>${user.login}</span></p>
                 <p>Email: <span>${user.email}</span></p>
             `;
-            
+
             document.getElementById("stats-info-content").innerHTML = `
                 <p>Audits ratio: <span>${(user.auditRatio).toFixed(1)}</span></p>
                 <p>Total XP: <span>${getExtension(totalXp)}</span></p>
             `;
-            
+
             lineChart(allXpTransactions);
             circleChart(xpTransactions)
         })
@@ -166,3 +166,26 @@ const dataDisplay = (jwt) => {
 };
 
 checkAuth();
+
+const themeToggleBtn = document.getElementById("theme-toggle");
+
+const setThemeIcon = () => {
+    if (document.body.classList.contains("light-mode")) {
+        themeToggleBtn.textContent = "🌞";
+    } else {
+        themeToggleBtn.textContent = "🌙";
+    }
+};
+
+const currentTheme = localStorage.getItem("theme");
+if (currentTheme === "light") {
+    document.body.classList.add("light-mode");
+}
+setThemeIcon();
+
+themeToggleBtn.addEventListener("click", () => {
+    document.body.classList.toggle("light-mode");
+    const isLight = document.body.classList.contains("light-mode");
+    localStorage.setItem("theme", isLight ? "light" : "dark");
+    setThemeIcon();
+});
