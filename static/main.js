@@ -133,9 +133,11 @@ const dataDisplay = (jwt) => {
                 logout()
                 return
             }
+
             const user = data.data.user[0];
             const xpTransactions = data.data.xpTransactions;
             const allXpTransactions = data.data.allXpTransactions;
+
 
             let totalXp = 0;
 
@@ -143,24 +145,60 @@ const dataDisplay = (jwt) => {
                 totalXp += allXpTransactions[i].amount
             }
 
-            document.getElementById("personal-info-content").innerHTML = `
+            const persoContent = document.getElementById("personal-info-div")
+            persoContent.classList.add("personal-info", "card")
+            persoContent.innerHTML = `
+                <h1>Personal Informations</h1>
+                <div id="personal-info-content">
                 <p>First Name: <span>${user.firstName}</span></p>
                 <p>Last Name: <span>${user.lastName}</span></p>
+                </div>
             `;
 
-            document.getElementById("account-info-content").innerHTML = `
+            const accountContent = document.getElementById("account-info-div")
+            accountContent.classList.add("account-info", "card")
+            accountContent.innerHTML = `
+                <h1>Account Details</h1>
+                <div id="account-info-content">
                 <p>ID: <span>${user.id}</span></p>
                 <p>Login: <span>${user.login}</span></p>
-                <p>Email: <span>${user.email}</span></p>
+                <p>Email: <span>${user.email}</span></p></div>
             `;
 
-            document.getElementById("stats-info-content").innerHTML = `
-                <p>Audits ratio: <span>${(user.auditRatio).toFixed(1)}</span></p>
-                <p>Total XP: <span>${getExtension(totalXp)}</span></p>
-            `;
+            const remove = document.getElementsByClassName("remove")
+            const section = document.getElementById("logged-in-section")
 
-            lineChart(allXpTransactions);
-            circleChart(xpTransactions)
+            if (allXpTransactions.length === 0 || xpTransactions.length === 0) {
+                // const elementsToRemove = [...stats, ...xpProject, ...xpProg];
+                for (let i = 0; i < remove.length; i++) {
+                    remove[i].remove();
+                }
+                const warning = document.createElement("div")
+                warning.classList.add("card", "data-error")
+                warning.innerHTML = "This account does not include data to generate svg charts!"
+                section.append(warning)
+                return
+            } else {
+
+                document.getElementById("stats-info-div").innerHTML = `
+                    <p>Audits ratio: <span>${(user.auditRatio).toFixed(1)}</span></p>
+                    <p>Total XP: <span>${getExtension(totalXp)}</span></p>
+                `;
+    
+                document.getElementById("xp-pie-div").innerHTML = `
+                    <h1>XP by Project</h1>
+                    <svg id="xpPieChart" width="300" height="300" viewBox="-150 -150 300 300"></svg>
+                `
+    
+                document.getElementById("xp-progression-div").innerHTML = `
+                    <h1>XP Progression</h1>
+                    <svg id="xpGraph" width="100%" height="400"></svg>
+                `
+    
+                lineChart(allXpTransactions);
+                circleChart(xpTransactions)
+            }
+
         })
         .catch(error => console.error("Error fetching user data:", error));
 };

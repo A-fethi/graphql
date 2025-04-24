@@ -250,7 +250,7 @@ button:active {
 }
 
 .xp-pie {
-    grid-column: 1 / 3;
+    grid-column: 1 / 4;
     grid-row: 2 / 3;
 }
 
@@ -349,6 +349,11 @@ svg {
     background: none;
     border: none;
     cursor: pointer;
+}
+
+.data-error {
+    width: 50%;
+    margin: 0 auto;
 }
 
 @media (max-width: 1024px) {
