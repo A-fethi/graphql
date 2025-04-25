@@ -146,25 +146,25 @@ const dataDisplay = (jwt) => {
             }
 
             const persoContent = document.getElementById("personal-info-div")
-            persoContent.classList.add("personal-info", "card")
-            persoContent.innerHTML = `
+                persoContent.classList.add("personal-info", "card")
+                persoContent.innerHTML = `
+            <div id="personal-info-content">
                 <h1>Personal Informations</h1>
-                <div id="personal-info-content">
                 <p>First Name: <span>${user.firstName}</span></p>
                 <p>Last Name: <span>${user.lastName}</span></p>
                 </div>
             `;
 
-            const accountContent = document.getElementById("account-info-div")
-            accountContent.classList.add("account-info", "card")
-            accountContent.innerHTML = `
+                const accountContent = document.getElementById("account-info-div")
+                accountContent.classList.add("account-info", "card")
+                accountContent.innerHTML = `
+            <div id="account-info-content">
                 <h1>Account Details</h1>
-                <div id="account-info-content">
                 <p>ID: <span>${user.id}</span></p>
                 <p>Login: <span>${user.login}</span></p>
                 <p>Email: <span>${user.email}</span></p></div>
             `;
-
+            
             const remove = document.getElementsByClassName("remove")
             const section = document.getElementById("logged-in-section")
 
@@ -179,22 +179,34 @@ const dataDisplay = (jwt) => {
                 section.append(warning)
                 return
             } else {
-
-                document.getElementById("stats-info-div").innerHTML = `
+                const statsInfo = document.getElementById("stats-info-div")
+                statsInfo.classList.add("stats-info", "card")
+                statsInfo.innerHTML = `
+                <div id="stats-info-content">
+                    <h1>Statistics</h1>
                     <p>Audits ratio: <span>${(user.auditRatio).toFixed(1)}</span></p>
                     <p>Total XP: <span>${getExtension(totalXp)}</span></p>
+                </div>
                 `;
-    
-                document.getElementById("xp-pie-div").innerHTML = `
+
+                const xpPie = document.getElementById("xp-pie-div")
+                xpPie.classList.add("xp-pie", "card")
+                xpPie.innerHTML = `
+                <div>
                     <h1>XP by Project</h1>
                     <svg id="xpPieChart" width="300" height="300" viewBox="-150 -150 300 300"></svg>
+                </div>
                 `
-    
-                document.getElementById("xp-progression-div").innerHTML = `
+
+                const xpProg = document.getElementById("xp-progression-div")
+                xpProg.classList.add("xp-progression", "card")
+                xpProg.innerHTML = `
+                <div>
                     <h1>XP Progression</h1>
                     <svg id="xpGraph" width="100%" height="400"></svg>
+                </div>
                 `
-    
+
                 lineChart(allXpTransactions);
                 circleChart(xpTransactions)
             }
