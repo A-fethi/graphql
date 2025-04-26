@@ -57,7 +57,7 @@ A modern, responsive dashboard for visualizing user XP data from the Zone01 Oujd
 
 ## Technical Details
 
-- **Frontend:** Vanilla JavaScript, HTML5, CSS3 (no frameworks)
+- **Frontend:** JavaScript, HTML5, CSS3 (no frameworks)
 - **Charts:** Rendered using SVG for scalability and interactivity
 - **Authentication:** JWT-based, stored in `localStorage`
 - **Responsive Design:** CSS Grid and media queries
@@ -66,7 +66,7 @@ A modern, responsive dashboard for visualizing user XP data from the Zone01 Oujd
 
 ## Customization
 
-- **Colors & Theme:** Easily changeable via CSS variables in `static/styles/style.css`.
+- **Colors & Theme:** Easily changeable via CSS variables in `static/styles/style.css`, light/dark theme implemented.
 - **API Endpoint:** Update the API URLs in `static/main.js` if needed.
 
 ---
