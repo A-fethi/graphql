@@ -38,7 +38,7 @@ const login = () => {
         .then(async response => {
             if (!response.ok) {
                 const err = await response.text();
-                throw new Error(err);
+                throw new Error(JSON.parse(err).error);
             }
             return response.json();
         })
@@ -57,8 +57,7 @@ const login = () => {
             }, 3600000);
         })
         .catch(error => {
-            console.error(error)
-            showMessage("Login failed", "error")
+            showMessage(error.message, "error")
         });
 };
 
@@ -79,6 +78,11 @@ const logout = () => {
 logoutBtn.addEventListener('click', logout)
 
 const dataDisplay = (jwt) => {
+    const existingWarning = document.querySelector('.data-error');
+    if (existingWarning) {
+        existingWarning.remove();
+    }
+
     const query = `{
         user {
             id
@@ -165,11 +169,21 @@ const dataDisplay = (jwt) => {
                 <p>Email: <span>${user.email}</span></p></div>
             `;
 
+            const statsInfo = document.getElementById("stats-info-div");
+            const xpPie = document.getElementById("xp-pie-div");
+            const xpProg = document.getElementById("xp-progression-div");
             const remove = document.getElementsByClassName("remove")
             const section = document.getElementById("logged-in-section")
+            
+            statsInfo.innerHTML = '';
+            statsInfo.className = '';
+            xpPie.innerHTML = '';
+            xpPie.className = '';
+            xpProg.innerHTML = '';
+            xpProg.className = '';
+            
 
             if (allXpTransactions.length === 0 || xpTransactions.length === 0) {
-                // const elementsToRemove = [...stats, ...xpProject, ...xpProg];
                 for (let i = 0; i < remove.length; i++) {
                     remove[i].remove();
                 }
@@ -182,7 +196,6 @@ const dataDisplay = (jwt) => {
                     return
                 }
             } else {
-                const statsInfo = document.getElementById("stats-info-div")
                 statsInfo.classList.add("stats-info", "card")
                 statsInfo.innerHTML = `
                 <div id="stats-info-content">
@@ -192,14 +205,12 @@ const dataDisplay = (jwt) => {
                 </div>
                 `;
 
-                const xpPie = document.getElementById("xp-pie-div")
                 xpPie.classList.add("xp-pie", "card")
                 xpPie.innerHTML = `
                     <h1>XP by Project</h1>
                     <svg id="xpPieChart" width="300" height="300" viewBox="-150 -150 300 300"></svg>
                 `
 
-                const xpProg = document.getElementById("xp-progression-div")
                 xpProg.classList.add("xp-progression", "card")
                 xpProg.innerHTML = `
                     <h1>XP Progression</h1>
