@@ -146,8 +146,8 @@ const dataDisplay = (jwt) => {
             }
 
             const persoContent = document.getElementById("personal-info-div")
-                persoContent.classList.add("personal-info", "card")
-                persoContent.innerHTML = `
+            persoContent.classList.add("personal-info", "card")
+            persoContent.innerHTML = `
             <div id="personal-info-content">
                 <h1>Personal Informations</h1>
                 <p>First Name: <span>${user.firstName}</span></p>
@@ -155,16 +155,16 @@ const dataDisplay = (jwt) => {
                 </div>
             `;
 
-                const accountContent = document.getElementById("account-info-div")
-                accountContent.classList.add("account-info", "card")
-                accountContent.innerHTML = `
+            const accountContent = document.getElementById("account-info-div")
+            accountContent.classList.add("account-info", "card")
+            accountContent.innerHTML = `
             <div id="account-info-content">
                 <h1>Account Details</h1>
                 <p>ID: <span>${user.id}</span></p>
                 <p>Login: <span>${user.login}</span></p>
                 <p>Email: <span>${user.email}</span></p></div>
             `;
-            
+
             const remove = document.getElementsByClassName("remove")
             const section = document.getElementById("logged-in-section")
 
@@ -173,11 +173,14 @@ const dataDisplay = (jwt) => {
                 for (let i = 0; i < remove.length; i++) {
                     remove[i].remove();
                 }
-                const warning = document.createElement("div")
-                warning.classList.add("card", "data-error")
-                warning.innerHTML = "This account does not include data to generate svg charts!"
-                section.append(warning)
-                return
+                const existingWarning = document.querySelector('.data-error');
+                if (!existingWarning) {
+                    const warning = document.createElement("div")
+                    warning.classList.add("card", "data-error")
+                    warning.innerHTML = "This account does not include data to generate svg charts!"
+                    section.append(warning)
+                    return
+                }
             } else {
                 const statsInfo = document.getElementById("stats-info-div")
                 statsInfo.classList.add("stats-info", "card")
@@ -192,19 +195,15 @@ const dataDisplay = (jwt) => {
                 const xpPie = document.getElementById("xp-pie-div")
                 xpPie.classList.add("xp-pie", "card")
                 xpPie.innerHTML = `
-                <div>
                     <h1>XP by Project</h1>
                     <svg id="xpPieChart" width="300" height="300" viewBox="-150 -150 300 300"></svg>
-                </div>
                 `
 
                 const xpProg = document.getElementById("xp-progression-div")
                 xpProg.classList.add("xp-progression", "card")
                 xpProg.innerHTML = `
-                <div>
                     <h1>XP Progression</h1>
                     <svg id="xpGraph" width="100%" height="400"></svg>
-                </div>
                 `
 
                 lineChart(allXpTransactions);
