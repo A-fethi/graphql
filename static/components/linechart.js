@@ -1,8 +1,11 @@
 import { getExtension } from "./utils.js";
 
 export const lineChart = (data) => {
+    console.log(data);
+    
     if (!data || data.length === 0) {
         console.error("No data available for the chart");
+
         return;
     }
 

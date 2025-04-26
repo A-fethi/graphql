@@ -133,9 +133,11 @@ const dataDisplay = (jwt) => {
                 logout()
                 return
             }
+
             const user = data.data.user[0];
             const xpTransactions = data.data.xpTransactions;
             const allXpTransactions = data.data.allXpTransactions;
+
 
             let totalXp = 0;
 
@@ -143,24 +145,71 @@ const dataDisplay = (jwt) => {
                 totalXp += allXpTransactions[i].amount
             }
 
-            document.getElementById("personal-info-content").innerHTML = `
+            const persoContent = document.getElementById("personal-info-div")
+            persoContent.classList.add("personal-info", "card")
+            persoContent.innerHTML = `
+            <div id="personal-info-content">
+                <h1>Personal Informations</h1>
                 <p>First Name: <span>${user.firstName}</span></p>
                 <p>Last Name: <span>${user.lastName}</span></p>
+                </div>
             `;
 
-            document.getElementById("account-info-content").innerHTML = `
+            const accountContent = document.getElementById("account-info-div")
+            accountContent.classList.add("account-info", "card")
+            accountContent.innerHTML = `
+            <div id="account-info-content">
+                <h1>Account Details</h1>
                 <p>ID: <span>${user.id}</span></p>
                 <p>Login: <span>${user.login}</span></p>
-                <p>Email: <span>${user.email}</span></p>
+                <p>Email: <span>${user.email}</span></p></div>
             `;
 
-            document.getElementById("stats-info-content").innerHTML = `
-                <p>Audits ratio: <span>${(user.auditRatio).toFixed(1)}</span></p>
-                <p>Total XP: <span>${getExtension(totalXp)}</span></p>
-            `;
+            const remove = document.getElementsByClassName("remove")
+            const section = document.getElementById("logged-in-section")
 
-            lineChart(allXpTransactions);
-            circleChart(xpTransactions)
+            if (allXpTransactions.length === 0 || xpTransactions.length === 0) {
+                // const elementsToRemove = [...stats, ...xpProject, ...xpProg];
+                for (let i = 0; i < remove.length; i++) {
+                    remove[i].remove();
+                }
+                const existingWarning = document.querySelector('.data-error');
+                if (!existingWarning) {
+                    const warning = document.createElement("div")
+                    warning.classList.add("card", "data-error")
+                    warning.innerHTML = "This account does not include data to generate svg charts!"
+                    section.append(warning)
+                    return
+                }
+            } else {
+                const statsInfo = document.getElementById("stats-info-div")
+                statsInfo.classList.add("stats-info", "card")
+                statsInfo.innerHTML = `
+                <div id="stats-info-content">
+                    <h1>Statistics</h1>
+                    <p>Audits ratio: <span>${(user.auditRatio).toFixed(1)}</span></p>
+                    <p>Total XP: <span>${getExtension(totalXp)}</span></p>
+                </div>
+                `;
+
+                const xpPie = document.getElementById("xp-pie-div")
+                xpPie.classList.add("xp-pie", "card")
+                xpPie.innerHTML = `
+                    <h1>XP by Project</h1>
+                    <svg id="xpPieChart" width="300" height="300" viewBox="-150 -150 300 300"></svg>
+                `
+
+                const xpProg = document.getElementById("xp-progression-div")
+                xpProg.classList.add("xp-progression", "card")
+                xpProg.innerHTML = `
+                    <h1>XP Progression</h1>
+                    <svg id="xpGraph" width="100%" height="400"></svg>
+                `
+
+                lineChart(allXpTransactions);
+                circleChart(xpTransactions)
+            }
+
         })
         .catch(error => console.error("Error fetching user data:", error));
 };
