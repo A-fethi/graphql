@@ -24,7 +24,7 @@ export const circleChart = (projects) => {
             tooltip.innerHTML = `
                 <strong>Project:</strong> ${project.path.split('/').pop()}<br>
                 <strong>XP:</strong> ${getExtension(project.amount)}<br>
-                <strong>Percentage:</strong> ${(percentage*100).toFixed(2)}%
+                <strong>Percentage:</strong> ${(percentage * 100).toFixed(2)}%
             `;
             tooltip.style.display = "block";
             tooltip.style.left = `${e.pageX + 10}px`;

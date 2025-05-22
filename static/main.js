@@ -71,6 +71,8 @@ loginBtn.addEventListener("click", login);
 const logout = () => {
     localStorage.removeItem("jwt");
     jwt = null;
+    document.getElementById("email").value = "";
+    document.getElementById("password").value = "";
     showMessage("Logout successful", "success")
     checkAuth();
 };
@@ -139,8 +141,13 @@ const dataDisplay = (jwt) => {
             }
 
             const user = data.data.user[0];
-            const xpTransactions = data.data.xpTransactions;
-            const allXpTransactions = data.data.allXpTransactions;
+            const xpTransactions = data.data.xpTransactions
+            const allXpTransactions = data.data.allXpTransactions.sort((a, b) => {
+                const dateA = new Date(a.createdAt);
+                const dateB = new Date(b.createdAt);
+                return dateA - dateB;
+            }
+            );
 
 
             let totalXp = 0;
@@ -174,14 +181,14 @@ const dataDisplay = (jwt) => {
             const xpProg = document.getElementById("xp-progression-div");
             const remove = document.getElementsByClassName("remove")
             const section = document.getElementById("logged-in-section")
-            
+
             statsInfo.innerHTML = '';
             statsInfo.className = '';
             xpPie.innerHTML = '';
             xpPie.className = '';
             xpProg.innerHTML = '';
             xpProg.className = '';
-            
+
 
             if (allXpTransactions.length === 0 || xpTransactions.length === 0) {
                 for (let i = 0; i < remove.length; i++) {
