@@ -8,14 +8,17 @@ export const getColor = () => {
 }
 
 export const getExtension = (totalXP) => {
-    if (totalXP >= 1000000000) {
-        return (totalXP / 1000000000).toFixed(2) + " GB";
-    } else if (totalXP >= 1000000) {
-        return (totalXP / 1000000).toFixed(2) + " MB";
-    } else if (totalXP >= 1000) {
-        return (totalXP / 1000).toFixed(2) + " KB";
+    const sign = totalXP < 0 ? "-" : "";
+    const absXP = Math.abs(totalXP);
+
+    if (absXP >= 1000000000) {
+        return sign + (absXP / 1000000000).toFixed(2) + " GB";
+    } else if (absXP >= 1000000) {
+        return sign + (absXP / 1000000).toFixed(2) + " MB";
+    } else if (absXP >= 1000) {
+        return sign + (absXP / 1000).toFixed(2) + " KB";
     } else {
-        return totalXP + " B";
+        return sign + absXP + " B";
     }
 };
 
